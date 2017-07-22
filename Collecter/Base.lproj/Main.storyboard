@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Collecter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="Collecter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -21,7 +21,21 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4r3-D1-o9W">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="4r3-D1-o9W" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="4LG-sl-VI6"/>
+                            <constraint firstAttribute="trailing" secondItem="4r3-D1-o9W" secondAttribute="trailing" id="7TM-CS-fe9"/>
+                            <constraint firstItem="4r3-D1-o9W" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="9Og-de-PFN"/>
+                            <constraint firstItem="4r3-D1-o9W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="AnB-ry-k60"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4r3-D1-o9W" secondAttribute="bottom" id="cyt-cn-smT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4r3-D1-o9W" secondAttribute="bottom" id="ii7-vI-2Bx"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zyb-f8-DXr">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZCX-IL-tAf">
@@ -30,15 +44,18 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="TableView" destination="4r3-D1-o9W" id="4T8-ZH-nx5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="138.98050974512745"/>
         </scene>
-        <!--View Controller-->
+        <!--Memory View Controller-->
         <scene sceneID="9Cy-TT-b9S">
             <objects>
-                <viewController id="QhF-u5-oHi" sceneMemberID="viewController">
+                <viewController id="QhF-u5-oHi" customClass="MemoryViewController" customModule="Collecter" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bmt-xb-BVt"/>
                         <viewControllerLayoutGuide type="bottom" id="Shh-1h-Kj9"/>
@@ -47,7 +64,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="20170130_181618.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d4v-oy-5lY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="spatial" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="20170130_181618.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="d4v-oy-5lY">
                                 <rect key="frame" x="47" y="84" width="280" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="fcw-oJ-S35"/>
@@ -63,6 +80,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B5L-JO-zVd">
                                 <rect key="frame" x="172" y="307" width="30" height="30"/>
                                 <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="AddButton:" destination="QhF-u5-oHi" eventType="touchUpInside" id="gqs-Bv-Kea"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,10 +98,22 @@
                     </view>
                     <navigationItem key="navigationItem" id="jSw-hd-sDh">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="camera" id="g5E-Q8-6mt"/>
-                            <barButtonItem title="Photos" id="nKp-oY-dex"/>
+                            <barButtonItem systemItem="camera" id="g5E-Q8-6mt">
+                                <connections>
+                                    <action selector="CameraTapped:" destination="QhF-u5-oHi" id="AOz-xI-CsK"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Photos" id="nKp-oY-dex">
+                                <connections>
+                                    <action selector="PhotosTapped:" destination="QhF-u5-oHi" id="7C0-kV-Z5b"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ImageView" destination="d4v-oy-5lY" id="aTC-f6-grx"/>
+                        <outlet property="TitleTextField" destination="GZq-3F-Lqn" id="qdz-Mn-FA7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSy-yR-dy2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
