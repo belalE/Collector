@@ -11,6 +11,7 @@ import UIKit
 class MemoryViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     var imagePicker = UIImagePickerController()
+    var memory : Memory? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,22 +20,57 @@ class MemoryViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         
         imagePicker.delegate = self
         
+        if memory != nil {
+            print("We have a memory")
+            
+            ImageView.image = UIImage(data: memory!.image as! Data)
+            TitleTextField.text = memory!.title
+            
+            addUpdateButton.setTitle("Update", for: .normal)
+        } else {
+            DeleteButton.isHidden = true
+        }
     }
 
+    @IBOutlet weak var DeleteButton: UIButton!
     @IBOutlet weak var ImageView: UIImageView!
     
+    @IBOutlet weak var addUpdateButton: UIButton!
     @IBOutlet weak var TitleTextField: UITextField!
     
     @IBAction func AddButton(_ sender: Any) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        if memory != nil {
+            
+            
+            memory!.title = TitleTextField.text
+            memory!.image = UIImagePNGRepresentation(ImageView.image!) as! NSData
+
+            
+        } else {
         
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let memory = Memory(context: context)
         memory.title = TitleTextField.text
         memory.image = UIImagePNGRepresentation(ImageView.image!) as! NSData
+       
+        }
+        
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        navigationController!.popViewController(animated: true)
+        
+        
+        
+    }
+    @IBAction func DeleteTapped(_ sender: Any) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        context.delete(memory!)
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
         navigationController!.popViewController(animated: true)
+
         
     }
     @IBAction func PhotosTapped(_ sender: Any) {

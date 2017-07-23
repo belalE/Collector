@@ -39,6 +39,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let memory = memories[indexPath.row]
+        performSegue(withIdentifier: "MemorySegue", sender: memory)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let nextVC = segue.destination as! MemoryViewController
+        nextVC.memory = sender as? Memory
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
