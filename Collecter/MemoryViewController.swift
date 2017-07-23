@@ -87,6 +87,10 @@ class MemoryViewController: UIViewController,UIImagePickerControllerDelegate,UIN
         imagePicker.dismiss(animated: true, completion: nil)
     }
     @IBAction func CameraTapped(_ sender: Any) {
+        imagePicker.sourceType = .camera
+        
+        present(imagePicker, animated: true, completion: nil)
+        
     }
 
 }
